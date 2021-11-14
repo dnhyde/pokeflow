@@ -5,9 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import io.github.dnhyde.pokeflow.screens.detail.PokemonDetail
+import io.github.dnhyde.pokeflow.screens.home.Home
 import io.github.dnhyde.pokeflow.ui.theme.PokeflowTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,24 +19,33 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             PokeflowTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
+                    NavHost(navController = rememberNavController(), startDestination = Routes.Home.path) {
+                        composable(Routes.Home.path) {
+                            Home()
+                        }
+                        composable(Routes.PokemonDetail.path) {
+                            PokemonDetail()
+                        }
+                    }
                 }
             }
         }
     }
 }
 
+@Preview(showBackground = true)
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun HomePreview() {
+    PokeflowTheme {
+        Home()
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun DetailPreview() {
     PokeflowTheme {
-        Greeting("Android")
+        PokemonDetail()
     }
 }
