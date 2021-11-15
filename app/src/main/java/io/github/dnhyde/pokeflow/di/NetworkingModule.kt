@@ -1,5 +1,7 @@
 package io.github.dnhyde.pokeflow.di
 
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +15,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkingModule() {
+class NetworkingModule {
+
+    private val moshi = Moshi.Builder()
+        .addLast(KotlinJsonAdapterFactory())
+        .build()
 
     @Singleton
     @Provides
@@ -21,7 +27,7 @@ class NetworkingModule() {
         return Retrofit.Builder()
             .client(OkHttpClient.Builder().build())
             .baseUrl(baseUlr)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
     }
 
@@ -31,11 +37,11 @@ class NetworkingModule() {
         return retrofit.create(PokeApiService::class.java)
     }
 
-    @Provides
-    @Singleton
-    fun providePokeApiClient(pokeApiService: PokeApiService): PokeApiClient {
-        return PokeApiClient(pokeApiService)
-    }
+//    @Provides
+//    @Singleton
+//    fun providePokeApiClient(pokeApiService: PokeApiService): PokeApiClient {
+//        return PokeApiClient(pokeApiService)
+//    }
 
     companion object {
         const val baseUlr = "https://pokeapi.co/api/v2/"
