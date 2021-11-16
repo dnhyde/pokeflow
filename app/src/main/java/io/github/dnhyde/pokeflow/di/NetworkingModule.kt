@@ -6,7 +6,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.github.dnhyde.pokeflow.networking.PokeApiClient
 import io.github.dnhyde.pokeflow.networking.PokeApiService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
