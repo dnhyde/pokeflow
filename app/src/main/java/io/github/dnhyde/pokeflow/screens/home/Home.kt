@@ -3,6 +3,7 @@ package io.github.dnhyde.pokeflow.screens.home
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -52,13 +53,13 @@ fun Home(homeViewModel: HomeViewModel, navController: NavController) {
                     }
 
                     if (lastVisibleItemIndex == listState.layoutInfo.totalItemsCount) {
-                        currentIndex.value = lastVisibleItemIndex - 20
+                        currentIndex.value = lastVisibleItemIndex - (listState.layoutInfo.visibleItemsInfo.size - 1)
                         homeViewModel.getMorePokemons()
                     }
 
                     LazyColumn(state = listState) {
                         items(items = uiState.pokemons, key = { pokemon -> pokemon.name }) { pokemon ->
-                            Text(text = pokemon.name)
+                            Text(modifier = Modifier.padding(25.dp).fillMaxWidth(), text = pokemon.name)
                         }
                     }
                 }
