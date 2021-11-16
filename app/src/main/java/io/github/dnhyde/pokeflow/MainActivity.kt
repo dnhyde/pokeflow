@@ -11,15 +11,25 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import coil.Coil
+import coil.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.dnhyde.pokeflow.screens.detail.PokemonDetail
 import io.github.dnhyde.pokeflow.screens.home.Home
 import io.github.dnhyde.pokeflow.ui.theme.PokeflowTheme
+import kotlinx.coroutines.Dispatchers
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // image caching
+        // https://github.com/coil-kt/coil/issues/409
+        val imageLoader = ImageLoader.Builder(applicationContext).dispatcher(Dispatchers.Default)
+            .build()
+        Coil.setImageLoader(imageLoader)
+
         setContent {
             PokeflowTheme {
                 Surface(color = MaterialTheme.colors.background) {

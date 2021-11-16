@@ -90,6 +90,9 @@ dependencies {
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha03")
     implementation("androidx.compose.runtime:runtime-livedata:1.1.0-beta02")
 
+    // Coil
+    implementation("io.coil-kt:coil-compose:2.0.0-alpha03")
+
     // Test
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
