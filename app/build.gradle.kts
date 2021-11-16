@@ -69,6 +69,9 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("com.google.android.material:material:1.4.0")
 
+    // Uniflow
+    implementation("org.uniflow-kt:uniflow-android:1.0.10")
+
     // Hilt
     implementation("com.google.dagger:hilt-android:2.40")
     kapt("com.google.dagger:hilt-android-compiler:2.40")
@@ -85,6 +88,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.4.0-beta02")
     implementation("androidx.activity:activity-compose:1.4.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha03")
+    implementation("androidx.compose.runtime:runtime-livedata:1.1.0-beta02")
 
     // Test
     testImplementation("junit:junit:4.13.2")
