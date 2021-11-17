@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                             Home(hiltViewModel(), navController)
                         }
                         composable(Routes.PokemonDetail.path) {
-                            PokemonDetail()
+                            PokemonDetail(hiltViewModel(), navController, it.arguments?.getString("name"))
                         }
                     }
                 }
@@ -53,6 +53,6 @@ fun HomePreview() {
 @Composable
 fun DetailPreview() {
     PokeflowTheme {
-        PokemonDetail()
+        PokemonDetail(hiltViewModel(), rememberNavController(), "pokemon name")
     }
 }
