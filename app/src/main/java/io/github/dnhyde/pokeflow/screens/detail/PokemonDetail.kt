@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -154,9 +155,27 @@ internal fun PokemonInfoBox(pokemonInfo: PokemonDetailInfo) {
         }
         pokemonInfo.stats.forEach {
             item {
-                Row(horizontalArrangement = Arrangement.SpaceEvenly) {
-                    Text(text = "${it.statInfo.name}: ")
-                    Text(text = it.base.toString())
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = "${it.statInfo.name}: ",
+                        modifier = Modifier.padding(8.dp).fillMaxWidth(0.4f),
+                    )
+                    Text(
+                        text = it.base.toString(),
+                        modifier = Modifier.padding(8.dp),
+                    )
+                    LinearProgressIndicator(
+                        modifier = Modifier.padding(8.dp),
+                        progress = it.base / 100f,
+                        color = Color(
+                            palette?.mutedSwatch?.rgb ?: 0
+                        ),
+
+                    )
                 }
             }
         }
