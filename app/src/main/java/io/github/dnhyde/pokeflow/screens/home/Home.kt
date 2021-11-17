@@ -1,6 +1,8 @@
 package io.github.dnhyde.pokeflow.screens.home
 
 import android.widget.Toast
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +14,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,12 +25,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.skydoves.landscapist.glide.GlideImage
+import io.github.dnhyde.pokeflow.R
 import io.github.dnhyde.pokeflow.model.PokemonBasicInfo
 import io.uniflow.android.livedata.states
 import io.uniflow.core.flow.data.UIState
@@ -42,7 +50,10 @@ fun Home(homeViewModel: HomeViewModel, navController: NavController) {
     ) {
         val currentIndex = remember { mutableStateOf(0) }
 
-        Text(text = "Home")
+        Text(
+            text = stringResource(id = R.string.title_home),
+            style = MaterialTheme.typography.h4,
+        )
 
         homeViewModel.states.observeAsState().value?.let { uiState ->
             when (uiState) {
@@ -95,7 +106,7 @@ internal fun PokemonItem(
         modifier = Modifier
             .clickable { onPokemonSelect(pokemon.name) }
             .fillMaxWidth()
-            .padding(top = 12.dp, bottom = 12.dp),
+            .padding(top = 16.dp, bottom = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -108,15 +119,18 @@ internal fun PokemonItem(
                     .fitCenter()
             },
             contentDescription = pokemon.name,
-            modifier = Modifier.size(50.dp)
+            modifier = Modifier.size(60.dp)
+                .clip(CircleShape)
+                .background(Color.Black)
+                .border(2.dp, Color.Black, CircleShape)
         )
         Text(
             text = pokemon.name,
-//            style = MaterialTheme.typography.h4,
+            style = MaterialTheme.typography.body2,
         )
         Text(
             text = "#$index",
-//            style = MaterialTheme.typography.h6,
+            style = MaterialTheme.typography.h5,
         )
     }
 }
