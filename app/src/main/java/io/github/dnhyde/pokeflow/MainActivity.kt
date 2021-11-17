@@ -20,6 +20,7 @@ import io.github.dnhyde.pokeflow.ui.theme.PokeflowTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             PokeflowTheme {
                 Surface(color = MaterialTheme.colors.background) {

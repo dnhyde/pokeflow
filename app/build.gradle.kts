@@ -63,13 +63,23 @@ android {
 
 dependencies {
     implementation("androidx.core:core-ktx:1.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0")
+
     implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("com.google.android.material:material:1.4.0")
+
+    // Uniflow
+    implementation("org.uniflow-kt:uniflow-android:1.0.10")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.40")
     kapt("com.google.dagger:hilt-android-compiler:2.40")
+
+    // Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
 
     // Compose
     implementation("androidx.compose.ui:ui:1.0.5")
@@ -78,6 +88,10 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.4.0-beta02")
     implementation("androidx.activity:activity-compose:1.4.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha03")
+    implementation("androidx.compose.runtime:runtime-livedata:1.1.0-beta02")
+
+    // Coil
+    implementation("com.github.skydoves:landscapist-glide:1.4.2")
 
     // Test
     testImplementation("junit:junit:4.13.2")
