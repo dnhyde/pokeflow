@@ -100,7 +100,7 @@ fun Home(homeViewModel: HomeViewModel, navController: NavController) {
 
                 is HomeViewModel.HomeViewState.ErrorState -> Toast.makeText(
                     LocalContext.current, uiState.message,
-                    Toast.LENGTH_SHORT
+                    Toast.LENGTH_LONG
                 ).show()
             }
         }

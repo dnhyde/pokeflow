@@ -9,7 +9,12 @@
     <string name="error_internet_detail">Could not get pokemon info now!\nYou may be disconnected from Pallet Town..
         .</string>
 
+    <string name="label_experience">xp</string>
+    <string name="label_height">mt</string>
+    <string name="label_weight">kg</string>
 
+    <string name="label_stats">Stats</string>
+    <string name="label_types">Types</string>
 
 
 
