@@ -32,7 +32,12 @@ class HomeViewModel @Inject constructor(private val homeRepository: HomeReposito
                 pokemons.addAll(it)
                 setState(HomeViewState.DataLoadedState(pokemons))
             }, {
-                setState(HomeViewState.ErrorState("Could not get more pokemons now, try again in a while "))
+                setState(
+                    // TODO: check how to get context from DataFlow (does not extends AndroidViewModel)
+                    HomeViewState.ErrorState(
+                        "Could not get more pokemons now!\nYou may be disconnected from Pallet Town..."
+                    )
+                )
             })
         }
     }
