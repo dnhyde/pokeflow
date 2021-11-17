@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Pokeflow</string>
+
+    <string name="title_home">Pokédex</string>
+    <string name="title_detail">About</string>
+
+    <string name="error_internet_home">Could not get more pokemons now!\nYou may be disconnected from Pallet Town..
+        .</string>
+    <string name="error_internet_detail">Could not get pokemon info now!\nYou may be disconnected from Pallet Town..
+        .</string>
+
+    <string name="label_experience">xp</string>
+    <string name="label_height">mt</string>
+    <string name="label_weight">kg</string>
+
+    <string name="label_stats">Stats</string>
+    <string name="label_types">Types</string>
+
+
+
+</resources>
