@@ -1,15 +1,14 @@
 package io.github.dnhyde.pokeflow.screens.home
 
 import android.widget.Toast
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -25,7 +24,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import coil.compose.rememberImagePainter
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.skydoves.landscapist.glide.GlideImage
 import io.github.dnhyde.pokeflow.model.PokemonBasicInfo
 import io.uniflow.android.livedata.states
 import io.uniflow.core.flow.data.UIState
@@ -39,6 +40,7 @@ fun Home(homeViewModel: HomeViewModel, navController: NavController) {
             .fillMaxSize()
             .padding(16.dp)
     ) {
+        val currentIndex = remember { mutableStateOf(0) }
 
         Text(text = "Home")
 
@@ -56,9 +58,8 @@ fun Home(homeViewModel: HomeViewModel, navController: NavController) {
                     // https://developer.android.com/jetpack/compose/lists#large-datasets )
                     val listState = rememberLazyListState()
                     val lastVisibleItemIndex = (listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0) + 1
-                    val currentIndex = remember { mutableStateOf(0) }
 
-                    LaunchedEffect(currentIndex) {
+                    LaunchedEffect(currentIndex.value) {
                         launch { listState.scrollToItem(currentIndex.value) }
                     }
 
@@ -70,7 +71,7 @@ fun Home(homeViewModel: HomeViewModel, navController: NavController) {
                     LazyColumn(state = listState) {
                         itemsIndexed(items = uiState.pokemons, key = { _, pokemon -> pokemon.name }) {
                             index, pokemon ->
-                            PokemonItem(index = index, pokemon = pokemon, onPokemonSelect = {})
+                            PokemonItem(index = index + 1, pokemon = pokemon, onPokemonSelect = {})
                         }
                     }
                 }
@@ -98,12 +99,16 @@ internal fun PokemonItem(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Image(
-            painter = rememberImagePainter(
-                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/$index.png"
-            ),
+        GlideImage(
+            imageModel =
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/$index.png",
+            requestOptions = {
+                RequestOptions()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .fitCenter()
+            },
             contentDescription = pokemon.name,
-            modifier = Modifier.height(50.dp)
+            modifier = Modifier.size(50.dp)
         )
         Text(
             text = pokemon.name,
