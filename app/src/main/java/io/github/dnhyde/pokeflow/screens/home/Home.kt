@@ -38,10 +38,18 @@ import io.github.dnhyde.pokeflow.R
 import io.github.dnhyde.pokeflow.model.PokemonBasicInfo
 import io.uniflow.android.livedata.states
 import io.uniflow.core.flow.data.UIState
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @Composable
 fun Home(homeViewModel: HomeViewModel, navController: NavController) {
+
+    // Navigate when country selected
+    LaunchedEffect(homeViewModel.navAction) {
+        homeViewModel.navAction.collect {
+            navController.navigate(it)
+        }
+    }
 
     Column(
         Modifier
@@ -82,14 +90,17 @@ fun Home(homeViewModel: HomeViewModel, navController: NavController) {
                     LazyColumn(state = listState) {
                         itemsIndexed(items = uiState.pokemons, key = { _, pokemon -> pokemon.name }) {
                             index, pokemon ->
-                            PokemonItem(index = index + 1, pokemon = pokemon, onPokemonSelect = {})
+                            PokemonItem(index = index + 1, pokemon = pokemon, onPokemonSelect = {
+                                homeViewModel
+                                    .openPokemonDetail(pokemon.name)
+                            })
                         }
                     }
                 }
 
                 is HomeViewModel.HomeViewState.ErrorState -> Toast.makeText(
                     LocalContext.current, uiState.message,
-                    Toast.LENGTH_SHORT
+                    Toast.LENGTH_LONG
                 ).show()
             }
         }

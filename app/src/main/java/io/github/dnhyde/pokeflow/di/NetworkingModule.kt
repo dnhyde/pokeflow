@@ -36,12 +36,6 @@ class NetworkingModule {
         return retrofit.create(PokeApiService::class.java)
     }
 
-//    @Provides
-//    @Singleton
-//    fun providePokeApiClient(pokeApiService: PokeApiService): PokeApiClient {
-//        return PokeApiClient(pokeApiService)
-//    }
-
     companion object {
         const val baseUlr = "https://pokeapi.co/api/v2/"
     }
